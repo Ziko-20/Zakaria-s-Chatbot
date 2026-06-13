@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakaria's Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">Zakaria's Chatbot</div>
+            <button class="new-chat-btn" onclick="clearChat()">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Nouvelle conversation
+            </button>
+            <div class="sidebar-label">Récent</div>
+            <div class="conv-item active">Lier un fichier CSS</div>
+            <div class="conv-item">Laravel Sanctum Auth</div>
+            <div class="conv-item">React 19 + Laravel 13</div>
+            <div class="conv-item">Rapport de stage LaTeX</div>
+        </aside>
+
+        <!-- Main -->
+        <div class="main">
+
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="model-pill">
+                    <i class="fa-solid fa-microchip"></i>
+                    Claude Sonnet
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="topbar-right">
+                    <div class="icon-btn" title="Partager">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    </div>
+                    <div class="avatar-btn">ZL</div>
+                </div>
+            </header>
+
+            <!-- Messages -->
+            <main class="chat-area" id="chat-area">
+                <div class="msg-row bot">
+                    <div class="msg-avatar bot-av">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="msg-body">
+                        <div class="msg-bubble">Bonjour ! Je suis l'assistant de Zakaria. Comment puis-je vous aider aujourd'hui ?</div>
+                        <div class="msg-meta">10:00</div>
+                        <div class="msg-actions">
+                            <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
+                            <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="msg-row user">
+                    <div class="msg-body">
+                        <div class="msg-bubble">Salut ! Peux-tu m'expliquer comment lier un fichier CSS ?</div>
+                        <div class="msg-meta">10:01</div>
+                    </div>
+                    <div class="msg-avatar user-av">ZL</div>
+                </div>
+                <div class="msg-row bot">
+                    <div class="msg-avatar bot-av">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="msg-body">
+                        <div class="msg-bubble">
+                            Bien sûr ! Ajoute simplement la balise
+                            <code>&lt;link rel="stylesheet" href="style.css"&gt;</code>
+                            à l'intérieur du <code>&lt;head&gt;</code> de ton HTML.
+                        </div>
+                        <div class="msg-meta">10:01</div>
+                        <div class="msg-actions">
+                            <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
+                            <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Input -->
+            <footer class="input-area">
+                <div class="input-wrapper">
+                    <textarea
+                        id="user-input"
+                        placeholder="Envoyer un message…"
+                        rows="1"
+                        aria-label="Message"
+                    ></textarea>
+                    <div class="input-footer">
+                        <div class="input-tools">
+                            <button class="tool-btn" title="Joindre un fichier">
+                                <i class="fa-solid fa-paperclip"></i>
+                            </button>
+                            <button class="tool-btn" title="Recherche web">
+                                <i class="fa-solid fa-globe"></i>
+                            </button>
+                        </div>
+                        <button id="send-btn" disabled aria-label="Envoyer">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="disclaimer">Zakaria's Chatbot peut faire des erreurs. Vérifiez les informations importantes.</p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        const input   = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatArea = document.getElementById('chat-area');
+
+        /* --- Auto-resize textarea & toggle send button --- */
+        input.addEventListener('input', () => {
+            sendBtn.disabled = input.value.trim() === '';
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        });
+
+        /* --- Send on Enter (Shift+Enter = newline) --- */
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!sendBtn.disabled) sendMessage();
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        /* --- Helpers --- */
+        function getTime() {
+            return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function appendMsg(role, text) {
+            const isBot = role === 'bot';
+            const row   = document.createElement('div');
+            row.className = `msg-row ${role}`;
+
+            const av = document.createElement('div');
+            av.className = `msg-avatar ${isBot ? 'bot-av' : 'user-av'}`;
+            av.innerHTML = isBot ? '<i class="fa-solid fa-robot"></i>' : 'ZL';
+
+            const body   = document.createElement('div');
+            body.className = 'msg-body';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'msg-bubble';
+            bubble.textContent = text;
+
+            const meta = document.createElement('div');
+            meta.className = 'msg-meta';
+            meta.textContent = getTime();
+
+            body.appendChild(bubble);
+            body.appendChild(meta);
+
+            if (isBot) {
+                const actions = document.createElement('div');
+                actions.className = 'msg-actions';
+                actions.innerHTML = `
+                    <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
+                    <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>`;
+                body.appendChild(actions);
+                row.appendChild(av);
+                row.appendChild(body);
+            } else {
+                row.appendChild(body);
+                row.appendChild(av);
+            }
+
+            chatArea.appendChild(row);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function showTyping() {
+            const row = document.createElement('div');
+            row.className = 'msg-row bot';
+            row.id = 'typing-row';
+            row.innerHTML = `
+                <div class="msg-avatar bot-av"><i class="fa-solid fa-robot"></i></div>
+                <div class="msg-body">
+                    <div class="msg-bubble">
+                        <div class="typing-indicator">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>`;
+            chatArea.appendChild(row);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function removeTyping() {
+            const el = document.getElementById('typing-row');
+            if (el) el.remove();
+        }
+
+        /* --- API call --- */
+        async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendMsg('user', text);
+    input.value = '';
+    input.style.height = 'auto';
+    sendBtn.disabled = true;
+    showTyping();
+
+    try {
+        const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        removeTyping();
+        const reply = data?.reply || 'Désolé, une erreur est survenue.';
+        appendMsg('bot', reply);
+    } catch {
+        removeTyping();
+        appendMsg('bot', 'Erreur de connexion. Réessayez.');
+    }
+}
+         
+        function clearChat() {
+            chatArea.innerHTML = '';
+            appendMsg('bot', 'Nouvelle conversation démarrée. Comment puis-je vous aider ?');
+        }
+    </script>
+
+</body>
+</html>
