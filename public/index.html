@@ -12,7 +12,7 @@
     <div id="app">
 
         <!-- Sidebar -->
-        <aside class="sidebar">
+      <!--   <aside class="sidebar">
             <div class="sidebar-title">Zakaria's Chatbot</div>
             <button class="new-chat-btn" onclick="clearChat()">
                 <i class="fa-solid fa-pen-to-square"></i>
@@ -23,66 +23,45 @@
             <div class="conv-item">Laravel Sanctum Auth</div>
             <div class="conv-item">React 19 + Laravel 13</div>
             <div class="conv-item">Rapport de stage LaTeX</div>
-        </aside>
+        </aside> -->
 
         <!-- Main -->
         <div class="main">
 
             <!-- Topbar -->
-            <header class="topbar">
-                <div class="model-pill">
-                    <i class="fa-solid fa-microchip"></i>
-                    Claude Sonnet
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="topbar-right">
-                    <div class="icon-btn" title="Partager">
-                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                    </div>
-                    <div class="avatar-btn">ZL</div>
-                </div>
-            </header>
+    <header class="topbar">
+    <div class="model-pill">
+        <i class="fa-solid fa-microchip"></i>
+        Claude Sonnet
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="topbar-right">
+        <a href="https://portfolio-zakaria-lemchaouri.vercel.app" target="_blank" class="icon-btn" title="Portfolio">
+            <i class="fa-solid fa-briefcase"></i> Portfolio
+        </a>
+        <a href="https://github.com/Ziko-20" target="_blank" class="icon-btn" title="GitHub">
+            <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <div class="avatar-btn">ZL</div>
+    </div>
+</header>
 
             <!-- Messages -->
-            <main class="chat-area" id="chat-area">
-                <div class="msg-row bot">
-                    <div class="msg-avatar bot-av">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="msg-body">
-                        <div class="msg-bubble">Bonjour ! Je suis l'assistant de Zakaria. Comment puis-je vous aider aujourd'hui ?</div>
-                        <div class="msg-meta">10:00</div>
-                        <div class="msg-actions">
-                            <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
-                            <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="msg-row user">
-                    <div class="msg-body">
-                        <div class="msg-bubble">Salut ! Peux-tu m'expliquer comment lier un fichier CSS ?</div>
-                        <div class="msg-meta">10:01</div>
-                    </div>
-                    <div class="msg-avatar user-av">ZL</div>
-                </div>
-                <div class="msg-row bot">
-                    <div class="msg-avatar bot-av">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="msg-body">
-                        <div class="msg-bubble">
-                            Bien sûr ! Ajoute simplement la balise
-                            <code>&lt;link rel="stylesheet" href="style.css"&gt;</code>
-                            à l'intérieur du <code>&lt;head&gt;</code> de ton HTML.
-                        </div>
-                        <div class="msg-meta">10:01</div>
-                        <div class="msg-actions">
-                            <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
-                            <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </main>
+           <main class="chat-area" id="chat-area">
+    <div class="msg-row bot">
+        <div class="msg-avatar bot-av">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="msg-body">
+            <div class="msg-bubble">Bonjour ! Je suis l'assistant de Zakaria. Comment puis-je vous aider aujourd'hui ?</div>
+            <div class="msg-meta">10:00</div>
+            <div class="msg-actions">
+                <button class="act-btn" title="Copier"><i class="fa-regular fa-copy"></i></button>
+                <button class="act-btn" title="Régénérer"><i class="fa-solid fa-rotate"></i></button>
+            </div>
+        </div>
+    </div>
+</main>
 
             <!-- Input -->
             <footer class="input-area">

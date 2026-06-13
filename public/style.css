@@ -1,41 +1,35 @@
-/* =========================================
-   Zakaria's Chatbot — style.css
-   Style inspiré ChatGPT (dark theme)
-   ========================================= */
-
-/* --- Reset & Base --- */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+ 
 :root {
-    --bg-main:        #212121;
-    --bg-sidebar:     #171717;
-    --bg-surface:     #2f2f2f;
-    --bg-hover:       #2a2a2a;
-    --bg-active:      #2a2a2a;
-    --border:         #3a3a3a;
-    --border-light:   #3a3a3a;
-    --text-primary:   #ececec;
-    --text-muted:     #8e8ea0;
-    --text-hint:      #555555;
+    --bg-main:        #f5f5f5;
+    --bg-sidebar:     #efefef;
+    --bg-surface:     #ffffff;
+    --bg-hover:       #e8e8e8;
+    --bg-active:      #e0e0e0;
+    --border:         #d0d0d0;
+    --border-light:   #d0d0d0;
+    --text-primary:   #1a1a1a;
+    --text-muted:     #555555;
+    --text-hint:      #aaaaaa;
     --accent-gradient: linear-gradient(135deg, #6c4fcc, #4a90e2);
-    --send-bg:        #ececec;
-    --send-color:     #171717;
-    --send-hover:     #d0d0d0;
-    --code-bg:        #1a1a1a;
-    --code-color:     #a8d8a8;
+    --send-bg:        #1a1a1a;
+    --send-color:     #ffffff;
+    --send-hover:     #333333;
+    --code-bg:        #efefef;
+    --code-color:     #6c4fcc;
 }
-
+ 
 html, body {
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg-main);
     color: var(--text-primary);
 }
-
+ 
 /* =========================================
    Layout principal
    ========================================= */
@@ -44,7 +38,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
 }
-
+ 
 /* =========================================
    Sidebar
    ========================================= */
@@ -57,8 +51,9 @@ html, body {
     padding: 12px 8px;
     gap: 4px;
     overflow-y: auto;
+    border-right: 0.5px solid var(--border);
 }
-
+ 
 .sidebar-title {
     font-size: 14px;
     font-weight: 600;
@@ -66,7 +61,7 @@ html, body {
     padding: 6px 10px 10px;
     letter-spacing: 0.01em;
 }
-
+ 
 .new-chat-btn {
     display: flex;
     align-items: center;
@@ -82,41 +77,11 @@ html, body {
     margin-bottom: 8px;
     font-family: inherit;
 }
-
+ 
 .new-chat-btn:hover {
-    background: #333;
+    background: #ddd;
 }
-
-.sidebar-label {
-    font-size: 11px;
-    color: var(--text-hint);
-    padding: 10px 10px 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-}
-
-.conv-item {
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    color: var(--text-muted);
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: background 0.15s, color 0.15s;
-}
-
-.conv-item:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-}
-
-.conv-item.active {
-    background: var(--bg-active);
-    color: var(--text-primary);
-}
-
+ 
 /* =========================================
    Zone principale
    ========================================= */
@@ -127,7 +92,7 @@ html, body {
     overflow: hidden;
     background: var(--bg-main);
 }
-
+ 
 /* =========================================
    Topbar
    ========================================= */
@@ -136,10 +101,11 @@ html, body {
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
-    border-bottom: 0.5px solid #2e2e2e;
+    border-bottom: 0.5px solid var(--border);
     flex-shrink: 0;
+    background: var(--bg-surface);
 }
-
+ 
 .model-pill {
     display: flex;
     align-items: center;
@@ -154,42 +120,43 @@ html, body {
     transition: background 0.15s;
     user-select: none;
 }
-
+ 
 .model-pill:hover {
-    background: #333;
+    background: #ddd;
 }
-
+ 
 .model-pill i {
     color: var(--text-muted);
     font-size: 13px;
 }
-
+ 
 .topbar-right {
     display: flex;
     align-items: center;
     gap: 8px;
 }
-
+ 
 .icon-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--bg-hover);
-    border: 0.5px solid var(--border);
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    gap: 6px;
+    text-decoration: none;
     color: var(--text-muted);
-    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 0.5px solid var(--border);
+    background: var(--bg-hover);
     transition: background 0.15s, color 0.15s;
+    cursor: pointer;
 }
-
+ 
 .icon-btn:hover {
-    background: #333;
+    background: #ddd;
     color: var(--text-primary);
 }
-
+ 
 .avatar-btn {
     width: 32px;
     height: 32px;
@@ -204,7 +171,7 @@ html, body {
     color: #fff;
     user-select: none;
 }
-
+ 
 /* =========================================
    Zone des messages
    ========================================= */
@@ -215,16 +182,16 @@ html, body {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 }
-
+ 
 .chat-area::-webkit-scrollbar {
     width: 4px;
 }
-
+ 
 .chat-area::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 4px;
 }
-
+ 
 /* --- Ligne de message --- */
 .msg-row {
     display: flex;
@@ -234,11 +201,11 @@ html, body {
     margin: 0 auto;
     width: 100%;
 }
-
+ 
 .msg-row.user {
     justify-content: flex-end;
 }
-
+ 
 /* --- Avatars --- */
 .msg-avatar {
     width: 30px;
@@ -251,64 +218,64 @@ html, body {
     font-size: 13px;
     margin-top: 2px;
 }
-
+ 
 .msg-avatar.bot-av {
     background: var(--bg-hover);
     border: 0.5px solid var(--border);
     color: var(--text-primary);
 }
-
+ 
 .msg-avatar.user-av {
     background: var(--accent-gradient);
     color: #fff;
     font-size: 11px;
     font-weight: 600;
 }
-
+ 
 /* --- Corps du message --- */
 .msg-body {
     display: flex;
     flex-direction: column;
     max-width: 72%;
 }
-
+ 
 .msg-row.user .msg-body {
     align-items: flex-end;
 }
-
+ 
 /* --- Bulle --- */
 .msg-bubble {
     font-size: 14px;
     line-height: 1.65;
     color: var(--text-primary);
 }
-
+ 
 .msg-row.user .msg-bubble {
     background: var(--bg-surface);
     padding: 10px 14px;
     border-radius: 16px 16px 4px 16px;
     border: 0.5px solid var(--border);
 }
-
+ 
 .msg-row.bot .msg-bubble {
     background: transparent;
     padding: 4px 0;
 }
-
+ 
 /* --- Métadonnées (heure) --- */
 .msg-meta {
     font-size: 11px;
     color: var(--text-hint);
     margin-top: 4px;
 }
-
+ 
 /* --- Actions bot (copier, régénérer) --- */
 .msg-actions {
     display: flex;
     gap: 4px;
     margin-top: 6px;
 }
-
+ 
 .act-btn {
     background: none;
     border: none;
@@ -320,12 +287,12 @@ html, body {
     transition: color 0.15s, background 0.15s;
     font-family: inherit;
 }
-
+ 
 .act-btn:hover {
     color: var(--text-primary);
     background: var(--bg-hover);
 }
-
+ 
 /* --- Code inline --- */
 code {
     background: var(--code-bg);
@@ -335,7 +302,7 @@ code {
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
 }
-
+ 
 /* --- Indicateur de frappe --- */
 .typing-indicator {
     display: flex;
@@ -343,7 +310,7 @@ code {
     align-items: center;
     padding: 6px 0;
 }
-
+ 
 .dot {
     width: 7px;
     height: 7px;
@@ -351,23 +318,24 @@ code {
     border-radius: 50%;
     animation: bounce 1.2s infinite;
 }
-
+ 
 .dot:nth-child(2) { animation-delay: 0.2s; }
 .dot:nth-child(3) { animation-delay: 0.4s; }
-
+ 
 @keyframes bounce {
     0%, 60%, 100% { transform: translateY(0);   opacity: 0.4; }
     30%            { transform: translateY(-6px); opacity: 1;   }
 }
-
+ 
 /* =========================================
    Zone de saisie
    ========================================= */
 .input-area {
     padding: 12px 20px 18px;
     flex-shrink: 0;
+    background: var(--bg-main);
 }
-
+ 
 .input-wrapper {
     max-width: 720px;
     margin: 0 auto;
@@ -380,11 +348,11 @@ code {
     gap: 8px;
     transition: border-color 0.2s;
 }
-
+ 
 .input-wrapper:focus-within {
-    border-color: #555;
+    border-color: #aaa;
 }
-
+ 
 #user-input {
     background: none;
     border: none;
@@ -400,22 +368,22 @@ code {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 }
-
+ 
 #user-input::placeholder {
     color: var(--text-hint);
 }
-
+ 
 .input-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
+ 
 .input-tools {
     display: flex;
     gap: 4px;
 }
-
+ 
 .tool-btn {
     width: 30px;
     height: 30px;
@@ -431,12 +399,12 @@ code {
     transition: color 0.15s, background 0.15s;
     font-family: inherit;
 }
-
+ 
 .tool-btn:hover {
     color: var(--text-primary);
     background: var(--bg-hover);
 }
-
+ 
 #send-btn {
     width: 32px;
     height: 32px;
@@ -452,32 +420,32 @@ code {
     transition: background 0.15s, transform 0.1s;
     font-family: inherit;
 }
-
+ 
 #send-btn:hover {
     background: var(--send-hover);
 }
-
+ 
 #send-btn:active {
     transform: scale(0.95);
 }
-
+ 
 #send-btn:disabled {
-    background: #333;
+    background: #ccc;
     color: var(--text-hint);
     cursor: not-allowed;
 }
-
+ 
 /* --- Disclaimer --- */
 .disclaimer {
     text-align: center;
     font-size: 11px;
-    color: #444;
+    color: var(--text-hint);
     margin-top: 8px;
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
 }
-
+ 
 /* =========================================
    Responsive — mobile
    ========================================= */
@@ -485,15 +453,15 @@ code {
     .sidebar {
         display: none;
     }
-
+ 
     .msg-row {
         padding: 6px 12px;
     }
-
+ 
     .input-area {
         padding: 10px 12px 14px;
     }
-
+ 
     .topbar {
         padding: 10px 14px;
     }
