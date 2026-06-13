@@ -1,4 +1,6 @@
 # Zakaria's Chatbot 🤖
+<img width="1909" height="872" alt="image" src="https://github.com/user-attachments/assets/addeb7bc-3892-47e1-a3c8-88146bf419bf" />
+
 
 A simple AI-powered chatbot built with Node.js, Express, and the Groq API (LLaMA 3.3 70B model). It features a clean chat interface inspired by modern AI assistants.
 
